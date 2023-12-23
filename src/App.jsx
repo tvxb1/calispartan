@@ -2,7 +2,6 @@ import './App.css'
 import {Box, Button, Container, Typography} from "@mui/material";
 import {useState} from "react";
 import WorkoutPicker from "./components/WorkoutPicker.jsx";
-import {array} from "prop-types";
 import workouts from "./Workouts.js";
 
 function App() {
@@ -43,7 +42,21 @@ function App() {
     }
 
     function generateWorkout() {
-        setWorkout(workouts[Math.floor(Math.random() * workouts.length)])
+        let filteredWorkouts = workouts
+
+        if (workoutPreferences.difficulty !== "any") {
+            filteredWorkouts = filteredWorkouts.filter(w => w.difficulty === workoutPreferences.difficulty)
+        }
+
+        if (workoutPreferences.bodyPart !== "any") {
+            filteredWorkouts = filteredWorkouts.filter(w => w.bodyPart === workoutPreferences.bodyPart)
+        }
+
+        if (workoutPreferences.duration !== "any") {
+            filteredWorkouts = filteredWorkouts.filter(w => w.duration === workoutPreferences.duration)
+        }
+
+        setWorkout(filteredWorkouts[Math.floor(Math.random() * filteredWorkouts.length)])
         setIsWorkoutGenerated(true)
     }
 
