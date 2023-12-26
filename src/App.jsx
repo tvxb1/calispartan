@@ -1,6 +1,6 @@
 import './App.css'
 import {Box, Button, Container, Typography} from "@mui/material";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import WorkoutPicker from "./components/WorkoutPicker.jsx";
 import workouts from "./Workouts.js";
 import WorkoutDisplayer from "./components/WorkoutDisplayer.jsx";
@@ -13,6 +13,7 @@ function App() {
     })
     const [currentWorkout, setCurrentWorkout] = useState({})
     const [isWorkoutGenerated, setIsWorkoutGenerated] = useState(false)
+    const [filteredWorkouts, setFilteredWorkouts] = useState(workouts)
 
 
     function setWorkoutDifficulty(e) {
@@ -42,21 +43,29 @@ function App() {
         })
     }
 
-    function generateWorkout() {
-        let filteredWorkouts = workouts
+    useEffect(() => {
+        filterWorkouts()
+    }, [workoutPreferences]);
+
+    function filterWorkouts() {
+        let remainingWorkouts = workouts
 
         if (workoutPreferences.difficulty !== "any") {
-            filteredWorkouts = filteredWorkouts.filter(w => w.difficulty === workoutPreferences.difficulty)
+            remainingWorkouts = remainingWorkouts.filter(w => w.difficulty === workoutPreferences.difficulty)
         }
 
         if (workoutPreferences.bodyPart !== "any") {
-            filteredWorkouts = filteredWorkouts.filter(w => w.bodyPart === workoutPreferences.bodyPart)
+            remainingWorkouts = remainingWorkouts.filter(w => w.bodyPart === workoutPreferences.bodyPart)
         }
 
         if (workoutPreferences.duration !== "any") {
-            filteredWorkouts = filteredWorkouts.filter(w => w.duration === workoutPreferences.duration)
+            remainingWorkouts = remainingWorkouts.filter(w => w.duration === workoutPreferences.duration)
         }
 
+        setFilteredWorkouts(remainingWorkouts)
+    }
+
+    function generateWorkout() {
         setCurrentWorkout(filteredWorkouts[Math.floor(Math.random() * filteredWorkouts.length)])
         setIsWorkoutGenerated(true)
     }
@@ -101,6 +110,8 @@ function App() {
                     onBodyPartChange={setWorkoutBodyPart}
                     onDurationChange={setWorkoutDuration}
                 />
+
+                <Typography variant={"caption"}>{filteredWorkouts.length} workouts available.</Typography>
 
                 <Button size={"large"} variant="contained" onClick={generateWorkout}>Generate</Button>
             </Box>
