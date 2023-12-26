@@ -1,6 +1,6 @@
 import './App.css'
 import {Box, Button, Container, Typography} from "@mui/material";
-import useState from "react";
+import {useState} from "react";
 import WorkoutPicker from "./components/WorkoutPicker.jsx";
 import workouts from "./Workouts.js";
 import WorkoutDisplayer from "./components/WorkoutDisplayer.jsx";
