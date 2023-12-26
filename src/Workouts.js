@@ -135,7 +135,7 @@ const workouts = [{
             "15 pushups",
             "5 pullups",
             "10 situps",
-            "10 jmping jacks",
+            "10 jumping jacks",
         ]
     },
     {

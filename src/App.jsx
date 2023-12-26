@@ -3,6 +3,7 @@ import {Box, Button, Container, Typography} from "@mui/material";
 import {useState} from "react";
 import WorkoutPicker from "./components/WorkoutPicker.jsx";
 import workouts from "./Workouts.js";
+import WorkoutDisplayer from "./components/WorkoutDisplayer.jsx";
 
 function App() {
     const [workoutPreferences, setWorkoutPreferences] = useState({
@@ -10,7 +11,7 @@ function App() {
         bodyPart: "any",
         duration: "any",
     })
-    const [workout, setWorkout] = useState({})
+    const [currentWorkout, setCurrentWorkout] = useState({})
     const [isWorkoutGenerated, setIsWorkoutGenerated] = useState(false)
 
 
@@ -56,7 +57,7 @@ function App() {
             filteredWorkouts = filteredWorkouts.filter(w => w.duration === workoutPreferences.duration)
         }
 
-        setWorkout(filteredWorkouts[Math.floor(Math.random() * filteredWorkouts.length)])
+        setCurrentWorkout(filteredWorkouts[Math.floor(Math.random() * filteredWorkouts.length)])
         setIsWorkoutGenerated(true)
     }
 
@@ -71,7 +72,7 @@ function App() {
             }}
             maxWidth={false}
         >
-            <Box mb={20}
+            <Box
             >
                 <Typography
                     variant={"h2"}
@@ -88,17 +89,28 @@ function App() {
                 </Typography>
             </Box>
 
-            <WorkoutPicker
-                workoutPreferences={workoutPreferences}
-                onDifficultyChange={setWorkoutDifficulty}
-                onBodyPartChange={setWorkoutBodyPart}
-                onDurationChange={setWorkoutDuration}
-            />
+            <Box sx={{
+                display: "flex",
+                alignItems: "center",
+                flexDirection: "column",
+            }}
+            mt={5}>
+                <WorkoutPicker
+                    workoutPreferences={workoutPreferences}
+                    onDifficultyChange={setWorkoutDifficulty}
+                    onBodyPartChange={setWorkoutBodyPart}
+                    onDurationChange={setWorkoutDuration}
+                />
 
-            <Button mt={10} size={"large"} variant="contained" onClick={generateWorkout}>Generate</Button>
+                <Button size={"large"} variant="contained" onClick={generateWorkout}>Generate</Button>
+            </Box>
 
 
-            {isWorkoutGenerated && workout.directions.map((direction, index) => <Typography key={index}>{direction}</Typography>)}
+            {isWorkoutGenerated && (
+                <Box mt={10}>
+                    <WorkoutDisplayer workout={currentWorkout} />
+                </Box>
+            )}
         </Container>
     )
 }

@@ -7,7 +7,6 @@ export default function WorkoutPicker({workoutPreferences, onDifficultyChange, o
             sx={{
                 display: "flex",
                 flexDirection: "row",
-                width: "50%",
                 alignItems: "center",
                 justifyContent: "space-evenly",
             }}
@@ -29,7 +28,7 @@ export default function WorkoutPicker({workoutPreferences, onDifficultyChange, o
                 </Select>
             </FormControl>
             <Typography variant={"body2"}>difficulty workout for the</Typography>
-            <FormControl>
+            <FormControl sx={{m: 1, minWidth: 120}}>
                 <InputLabel id="bodypart-picker">Body part</InputLabel>
                 <Select
                     labelId="bodypart-picker-label"
@@ -45,7 +44,7 @@ export default function WorkoutPicker({workoutPreferences, onDifficultyChange, o
                 </Select>
             </FormControl>
             <Typography variant={"body2"}>for a</Typography>
-            <FormControl>
+            <FormControl sx={{m: 1, minWidth: 120}}>
                 <InputLabel id="duration-picker">Duration</InputLabel>
                 <Select
                     labelId="duration-picker-label"
