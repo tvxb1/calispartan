@@ -1,6 +1,6 @@
 import './App.css'
 import {Box, Button, Container, Typography} from "@mui/material";
-import {useEffect, useState} from "react";
+import useState from "react";
 import WorkoutPicker from "./components/WorkoutPicker.jsx";
 import workouts from "./Workouts.js";
 import WorkoutDisplayer from "./components/WorkoutDisplayer.jsx";
@@ -13,7 +13,7 @@ function App() {
     })
     const [currentWorkout, setCurrentWorkout] = useState({})
     const [isWorkoutGenerated, setIsWorkoutGenerated] = useState(false)
-    const [filteredWorkouts, setFilteredWorkouts] = useState(workouts)
+    const filteredWorkouts = filterWorkouts()
 
 
     function setWorkoutDifficulty(e) {
@@ -43,10 +43,6 @@ function App() {
         })
     }
 
-    useEffect(() => {
-        filterWorkouts()
-    }, [workoutPreferences]);
-
     function filterWorkouts() {
         let remainingWorkouts = workouts
 
@@ -62,7 +58,7 @@ function App() {
             remainingWorkouts = remainingWorkouts.filter(w => w.duration === workoutPreferences.duration)
         }
 
-        setFilteredWorkouts(remainingWorkouts)
+        return remainingWorkouts
     }
 
     function generateWorkout() {
