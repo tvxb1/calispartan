@@ -77,7 +77,7 @@ function App() {
                 justifyContent: "center",
                 display: "flex",
                 height: "100vh",
-                flexDirection: "column"
+                flexDirection: "column",
             }}
             maxWidth={false}
         >

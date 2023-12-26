@@ -9,6 +9,7 @@ export default function WorkoutPicker({workoutPreferences, onDifficultyChange, o
                 flexDirection: "row",
                 alignItems: "center",
                 justifyContent: "space-evenly",
+                flexWrap: "wrap",
             }}
         >
             <Typography variant={"body2"}>I want a</Typography>
