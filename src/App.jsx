@@ -113,7 +113,7 @@ function App() {
             </Box>
 
 
-            {isWorkoutGenerated && (
+            {isWorkoutGenerated && currentWorkout && (
                 <Box mt={10}>
                     <WorkoutDisplayer workout={currentWorkout} />
                 </Box>
