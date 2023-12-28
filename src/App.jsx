@@ -114,7 +114,9 @@ function App() {
 
 
             {isWorkoutGenerated && currentWorkout && (
-                <Box mt={10}>
+                <Box mt={10} sx={{
+                    height: "200px",
+                }}>
                     <WorkoutDisplayer workout={currentWorkout} />
                 </Box>
             )}

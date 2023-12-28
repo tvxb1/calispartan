@@ -9,7 +9,7 @@ export default function WorkoutDisplayer({ workout }) {
             alignItems: "center",
 
         }}>
-            <Typography variant={"h6"}>{workout.directions[0]}</Typography>
+            <Typography variant={"h6"} align={"center"}>{workout.directions[0]}</Typography>
 
             {workout.directions.slice(1).map(direction => <Typography>{direction}</Typography>)}
         </Box>
